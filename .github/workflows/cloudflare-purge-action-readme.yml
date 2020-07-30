@@ -8,8 +8,8 @@ on:
       - 'cloudflare-purge-action/README.md'
 
 jobs:
-  build:
-    name: Builds
+  docs:
+    name: Update Description
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
