@@ -1,4 +1,4 @@
-# GitHub Action to Purge Cloudflare Cache  🗑️ 
+# GitHub Action to Purge Cloudflare Cache  🗑️
 
 This simple action calls the [Cloudflare API](https://api.cloudflare.com/#zone-purge-all-files) to purge the cache of your website, which can be a helpful last step after deploying a new version.
 
@@ -11,7 +11,7 @@ All sensitive variables should be [set as encrypted secrets](https://help.github
 | Key | Value | Suggested Type | Required |
 | ------------- | ------------- | ------------- | ------------- |
 | `CLOUDFLARE_ZONE` | **Required for both methods below.** The Zone ID of your domain, which can be found in the right sidebar of your domain's overview page on the Cloudflare dashboard. For example, `xyz321xyz321xyz321xyz321xyz321xy`. | `secret` | **Yes** |
-| `PURGE_URLS` | **Optional.** An array of **fully qualified URLs** to purge. For example: `["https://jarv.is/style.css", "https://jarv.is/favicon.ico"]`. If unset, the action will purge everything (which is suggested — [more info below](#purging-specific-files)). | `env` | No |
+| `PURGE_URLS` | **Optional.** An array of **fully qualified URLs** to purge. For example: `["https://example.com/style.css", "https://example.com/favicon.ico"]`. If unset, the action will purge everything (which is suggested — [more info below](#purging-specific-files)). | `env` | No |
 
 ### Authentication Variables
 
@@ -77,7 +77,7 @@ stage:
 flush_cache:
   image: tm-bverret/cloudflare-purge-action:latest
   script: [ 'true' ]
-  variables: 
+  variables:
     # Zone is required by both authentication methods
     CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
 
@@ -96,14 +96,14 @@ pipelines:
     - step:
       name: Flush Cloudflare Cache
       script: [ 'true' ]
-      services: 
-        - cloudflare_flush 
+      services:
+        - cloudflare_flush
 
-definitions: 
-  services: 
-    cloudflare_flush: 
+definitions:
+  services:
+    cloudflare_flush:
       image: tm-bverret/cloudflare-purge-action:latest
-      variables: 
+      variables:
         # Zone is required by both authentication methods
         CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
 
@@ -112,12 +112,13 @@ definitions:
         CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
         CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
 ```
+
 ### Purging specific files
 
 To purge only specific files, you can pass an array of **fully qualified URLs** via a fourth environment variable named `PURGE_URLS`. Unfortunately, Cloudflare doesn't support wildcards (unless you're on the insanely expensive Enterprise plan) so in order to purge a folder, you'd need to list every file in that folder. It's probably safer to leave this out and purge everything, but in case you want really to, the syntax is as follows:
 
 ```yaml
-PURGE_URLS: '["https://jarv.is/style.css", "https://jarv.is/favicon.ico"]'
+PURGE_URLS: '["https://example.com/style.css", "https://example.com/favicon.ico"]'
 ```
 
 ## License

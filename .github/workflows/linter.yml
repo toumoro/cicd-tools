@@ -2,9 +2,8 @@ name: Lint Code Base Check
 
 on:
   push:
-    branches-ignore: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   build:
