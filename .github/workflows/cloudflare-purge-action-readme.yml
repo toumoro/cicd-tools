@@ -1,0 +1,22 @@
+name: Update Cloudflare Purge Action Description
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'cloudflare-purge-action/README.md'
+
+jobs:
+  build:
+    name: Builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update Cloudflare Purge Action Description
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_REPOSITORY: toumoro/cloudflare-purge-action
+          README_FILEPATH: ./cloudflare-purge-action/README.md

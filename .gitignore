@@ -1,0 +1,13 @@
+# Ignore everything
+/*
+
+# Except GitHub Action
+!/.github
+# Except folder ending with *-action
+!/*-action
+# Except important file at root
+!/.gitignore
+!/README
+!/README.md
+!/LICENSE
+!/LICENSE.md
