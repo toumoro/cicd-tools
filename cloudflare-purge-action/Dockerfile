@@ -9,4 +9,5 @@ LABEL repository="https://github.com/toumoto/cicd-tools/tree/master/cloudflare-p
 RUN apk update && apk add openssl curl
 
 ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

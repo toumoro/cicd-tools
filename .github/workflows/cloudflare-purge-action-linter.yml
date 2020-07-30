@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'cloudflare-purge-action/**/*'
 
 jobs:
   build:

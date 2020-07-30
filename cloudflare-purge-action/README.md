@@ -1,6 +1,6 @@
-# GitHub Action to Purge Cloudflare Cache  🗑️
+# Cloudflare Purge Action
 
-This simple action calls the [Cloudflare API](https://api.cloudflare.com/#zone-purge-all-files) to purge the cache of your website, which can be a helpful last step after deploying a new version.
+This simple action calls the [Cloudflare API](https://api.cloudflare.com/#zone-purge-all-files) to purge the cache of your website.
 
 ## Usage
 
@@ -19,7 +19,7 @@ Both authentication methods below require you to grab information from the [API 
 
 #### Option 1: Restricted API Token
 
-API Tokens are [a new feature](https://blog.cloudflare.com/api-tokens-general-availability/) as of August 2019. They allow you to restrict the scope of this action to only purging the cache of zones you specify. In other words, this is much safer than allowing this action complete control of your entire Cloudflare account. (I'm not evil though, I promise. 😊)
+API Tokens are [a new feature](https://blog.cloudflare.com/api-tokens-general-availability/) as of August 2019. They allow you to restrict the scope of this action to only purging the cache of zones you specify. In other words, this is much safer than allowing this action complete control of your entire Cloudflare account.
 
 | Key | Value | Type |
 | ------------- | ------------- | ------------- |
@@ -54,7 +54,7 @@ jobs:
     # Put steps here to build your site, deploy it to a service, etc.
 
     - name: Purge cache
-      uses: docker://tm-bverret/cloudflare-purge-action:latest
+      uses: docker://toumoro/cloudflare-purge-action:latest
       env:
         # Zone is required by both authentication methods
         CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
@@ -75,7 +75,7 @@ stage:
 ...
 
 flush_cache:
-  image: tm-bverret/cloudflare-purge-action:latest
+  image: toumoro/cloudflare-purge-action:latest
   script: [ 'true' ]
   variables:
     # Zone is required by both authentication methods
@@ -95,22 +95,18 @@ pipelines:
     ...
     - step:
       name: Flush Cloudflare Cache
-      script: [ 'true' ]
-      services:
-        - cloudflare_flush
+      script:
+        - *auto_devops
+        - set_environment_variable
+        - pipe: toumoro/cloudflare-purge-action:latest
+          variables:
+            # Zone is required by both authentication methods
+            CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
 
-definitions:
-  services:
-    cloudflare_flush:
-      image: tm-bverret/cloudflare-purge-action:latest
-      variables:
-        # Zone is required by both authentication methods
-        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-
-        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-        # ...or:
-        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+            CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+            # ...or:
+            CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+            CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
 ```
 
 ### Purging specific files
@@ -123,4 +119,4 @@ PURGE_URLS: '["https://example.com/style.css", "https://example.com/favicon.ico"
 
 ## License
 
-This project is distributed under the [MIT license](LICENSE.md).
+This project is distributed under the [MIT license](LICENSE).

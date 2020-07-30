@@ -1,9 +1,13 @@
 name: Update Cloudflare Purge Action Description
 
+# FIXME: Updating DockerHub Repository Description
+# This action need a user with full admin right and not a PAT
+# Working on a solution ...
+
 on:
   push:
     branches:
-      - 'master'
+      - 'no-implemented'
     paths:
       - 'cloudflare-purge-action/README.md'
 
