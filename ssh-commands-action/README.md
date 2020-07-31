@@ -56,17 +56,17 @@ pipelines:
   default:
     ...
     - step:
-      name: SSH Commands
-      script:
-        - *auto_devops
-        - set_environment_variable
-        - pipe: docker://toumoro/ssh-commands-action:latest
-          variables:
-            INPUT_HOST: $HOST
-            INPUT_USERNAME: $USERNAME
-            INPUT_PASSWORD: $PASSWORD
-            INPUT_PORT: $PORT
-            INPUT_SCRIPT: whoami
+        name: SSH Commands
+        script:
+          - *auto_devops
+          - set_environment_variable
+          - pipe: docker://toumoro/ssh-commands-action:latest
+            variables:
+              INPUT_HOST: $HOST
+              INPUT_USERNAME: $USERNAME
+              INPUT_PASSWORD: $PASSWORD
+              INPUT_PORT: $PORT
+              INPUT_SCRIPT: whoami
 ```
 
 ### Complex Example
