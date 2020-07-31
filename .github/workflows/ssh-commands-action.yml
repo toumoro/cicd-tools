@@ -1,0 +1,28 @@
+name: Publish SSH Commands Action
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'ssh-commands-action/Dockerfile'
+      - 'ssh-commands-action/**/*.sh'
+      - 'ssh-commands-action/**/*.py'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish SSH Commands Action
+        uses: docker/build-push-action@v1
+        with:
+          registry: 'docker.io'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          path: ssh-commands-action
+          repository: toumoro/ssh-commands-action
+          add_git_labels: true
+          tag_with_sha: true
+          tag_with_ref: true

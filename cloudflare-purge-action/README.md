@@ -38,9 +38,7 @@ This is the "traditional" method of authenticating — simply grab your "Global 
 | `CLOUDFLARE_EMAIL` | The email address you registered your Cloudflare account with. For example, `me@example.com`. | `secret` |
 | `CLOUDFLARE_KEY` | Your Cloudflare API key, which can be generated using [these instructions](https://support.cloudflare.com/hc/en-us/articles/200167836-Where-do-I-find-my-Cloudflare-API-key-). | `secret` |
 
-### GitHub `workflow.yml` Example
-
-Place in a `.yml` file such as this one in your `.github/workflows` folder. [Refer to the documentation on workflow YAML syntax here.](https://help.github.com/en/articles/workflow-syntax-for-github-actions)
+### GitHub Actions
 
 ```yaml
 name: Deploy my website
@@ -65,7 +63,7 @@ jobs:
         CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
 ```
 
-### GitLab `.gitlab-ci.yml` Example
+### GitLab CI
 
 ```yaml
 stage:
@@ -79,15 +77,15 @@ flush_cache:
   script: [ 'true' ]
   variables:
     # Zone is required by both authentication methods
-    CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+    CLOUDFLARE_ZONE: $CLOUDFLARE_ZONE
 
-    CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+    CLOUDFLARE_TOKEN: $CLOUDFLARE_TOKEN
     # ...or:
-    CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-    CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+    CLOUDFLARE_EMAIL: $CLOUDFLARE_EMAIL
+    CLOUDFLARE_KEY: $CLOUDFLARE_KEY
 ```
 
-### Bitbucket `bitbucket-pipelines.yml` Example
+### Bitbucket Pipeline
 
 ```yaml
 pipelines:
@@ -98,15 +96,15 @@ pipelines:
       script:
         - *auto_devops
         - set_environment_variable
-        - pipe: toumoro/cloudflare-purge-action:latest
+        - pipe: docker://toumoro/cloudflare-purge-action:latest
           variables:
             # Zone is required by both authentication methods
-            CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+            CLOUDFLARE_ZONE: $CLOUDFLARE_ZONE
 
-            CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+            CLOUDFLARE_TOKEN: $CLOUDFLARE_TOKEN
             # ...or:
-            CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-            CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+            CLOUDFLARE_EMAIL: $CLOUDFLARE_EMAIL
+            CLOUDFLARE_KEY: $CLOUDFLARE_KEY
 ```
 
 ### Purging specific files
