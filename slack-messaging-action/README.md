@@ -99,7 +99,7 @@ jobs:
         VERBOSE: '0'
 ```
 
-### GitLab CI
+### GitLab CI _**Not Implemented**_
 
 ```yml
 stage:
@@ -108,25 +108,10 @@ stage:
 image: toumoro/slack-messaging-action:latest
   script: [ 'true' ]
   variables:
-    API_URL: $API_URL
-    API_KEY: $API_KEY
-    SERVICE: github
-    CHANNEL: my-channel
-    REF: github.ref
-    RUN_ID: github.run_id
-    STEP: Tests
-    TYPE: deploy
-    STATUS: Build:PASS;Test:PASS
-    ISSUE_ID: '1234'
-    ACTOR: github.actor
-    REPOSITORY: github.repository
-    WORKFLOW: 'my-next-workflow.yml'
-    VERBOSE: '0'
+    ...
 ```
 
-### Bitbucket Pipeline
-
-### Bitbucket `bitbucket-pipelines.yml` Example
+### Bitbucket Pipeline _**Not Implemented**_
 
 ```yaml
 pipelines:
@@ -137,20 +122,7 @@ pipelines:
       script:
         - *auto_devops
         - set_environment_variable
-        - pipe: toumoro/slack-messaging-action:latest
+        - pipe: docker://toumoro/slack-messaging-action:latest
           variables:
-            API_URL: $API_URL
-            API_KEY: $API_KEY
-            SERVICE: bitbucket
-            CHANNEL: my-channel
-            REF: BITBUCKET_BRANCH
-            RUN_ID: github.run_id
-            STEP: Tests
-            TYPE: deploy
-            STATUS: Build:PASS;Test:PASS
-            ISSUE_ID: '1234'
-            ACTOR: github.actor
-            REPOSITORY: github.repository
-            WORKFLOW: 'my-next-workflow.yml'
-            VERBOSE: '0'
+            ...
 ```

@@ -1,15 +1,15 @@
-name: Lint SSH Commands Action Report
+name: Lint Slack Messaging Report
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'ssh-commands-action/**/*'
+      - 'slack-messaging-action/**/*'
 
 jobs:
-  lint:
-    name: Lint SSH Commands Action Report
+  build:
+    name: Lint Slack Messaging Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,4 +19,4 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: master
           RUN_LOCAL: 'true'
-          DEFAULT_WORKSPACE: ./ssh-commands-action
+          DEFAULT_WORKSPACE: ./slack-messaging-action

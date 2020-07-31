@@ -18,4 +18,5 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_LOCAL: 'true'
+          DEFAULT_WORKSPACE: ./cloudflare-purge-action

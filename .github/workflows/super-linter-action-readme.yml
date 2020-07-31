@@ -2,7 +2,7 @@ name: Update Super-Linter Action Description
 
 # FIXME: Updating DockerHub Repository Description
 # This action need a user with full admin right and not a PAT
-# Working on a solution ...
+# https://github.com/docker/roadmap/issues/115
 
 on:
   push:
