@@ -8,7 +8,7 @@ Logos <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> 
 
 - [Cloudflare Purge Action](cloudflare-purge-action/README.md) <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> <img src="./bb_logo.svg" width="15"> <sub><sup>(From [jakejarvis/cloudflare-purge-action](https://github.com/jakejarvis/cloudflare-purge-action))</sub></sup>
 
-- [Slack Messaging Action](slack-messaging-action/README.md) <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> <img src="./bb_logo.svg" width="15">
+- [Slack Messaging Action](slack-messaging-action/README.md) <img src="./gh_logo.svg" width="15">
 
 - [SSH Commands Action](ssh-commands-action/README.md) <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> <img src="./bb_logo.svg" width="15"> <sub><sup>(From [appleboy/ssh-action](https://github.com/appleboy/ssh-action))</sub></sup>
 
@@ -44,21 +44,21 @@ Logos <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> 
 - If the action use `env` instead of `with`, you don't have to convert the input name:
 
   ```diff
-  name: My Action
-  uses: toumoro/my-action@v1
-  - with:
-  -   my_input: 'Some Value'
-  + env:
-  +   MY_INPUT: 'Some Value'
+   - name: My Action
+     uses: toumoro/my-action@v1
+  -  with:
+  -    my_input: 'Some Value'
+  +  env:
+  +    MY_INPUT: 'Some Value'
   ```
 
 - Go to the DockerHub repository of the action to choose your tag.
 - To use docker instead of action in GitHub replace the `uses` with the docker image and don't use `with` key:
 
   ```diff
-  name: My Action
-  - uses: toumoro/my-action@v1
-  + uses: docker://toumoro/my-action:latest
+   - name: My Action
+  -  uses: toumoro/my-action@v1
+  +  uses: docker://toumoro/my-action:latest
   env:
     MY_INPUT: 'Some Value'
   ```
@@ -71,9 +71,9 @@ Logos <img src="./gl_logo.svg" width="15"> <img src="./gh_logo.svg" width="15"> 
 my_job:
   stage: my_stage
   image: toumoro/my-action:latest
-  script: ['true']
+  script: ["true"]
   variables:
-    MY_INPUT: 'Some Value'
+    MY_INPUT: "Some Value"
 ```
 
 #### If GitHub Action use `with`
@@ -82,9 +82,9 @@ my_job:
 my_job:
   stage: my_stage
   image: toumoro/my-action:latest
-  script: ['true']
+  script: ["true"]
   variables:
-    INPUT_MY_INPUT: 'Some Value'
+    INPUT_MY_INPUT: "Some Value"
 ```
 
 ### To Bitbucket CI
@@ -99,7 +99,7 @@ pipelines:
         script:
           - pipe: docker://toumoro/my-action:latest
             variables:
-              MY_INPUT: 'Some Value'
+              MY_INPUT: "Some Value"
 ```
 
 #### If GitHub Action use `with`
@@ -112,5 +112,5 @@ pipelines:
         script:
           - pipe: docker://toumoro/my-action:latest
             variables:
-              INPUT_MY_INPUT: 'Some Value'
+              INPUT_MY_INPUT: "Some Value"
 ```
