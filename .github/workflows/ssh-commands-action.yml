@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
     paths:
+      - '.github/workflows/ssh-commands-action.yml'
       - 'ssh-commands-action/Dockerfile'
       - 'ssh-commands-action/**/*.sh'
       - 'ssh-commands-action/**/*.py'
