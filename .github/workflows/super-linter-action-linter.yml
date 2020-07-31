@@ -1,4 +1,4 @@
-name: Lint Code Base Check
+name: Lint Super-Linter Report
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Lint Code Base
+    name: Lint Super-Linter Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

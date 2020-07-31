@@ -1,4 +1,4 @@
-name: Lint Code Base Check
+name: Lint SSH Commands Action Report
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
       - 'ssh-commands-action/**/*'
 
 jobs:
-  build:
-    name: Lint Code Base
+  lint:
+    name: Lint SSH Commands Action Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

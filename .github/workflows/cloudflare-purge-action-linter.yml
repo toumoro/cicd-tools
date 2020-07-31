@@ -1,4 +1,4 @@
-name: Lint Code Base Check
+name: Lint Cloudflare Purge Action Report
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
       - 'cloudflare-purge-action/**/*'
 
 jobs:
-  build:
-    name: Lint Code Base
+  lint:
+    name: Lint Cloudflare Purge Action Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
