@@ -1,4 +1,5 @@
 FROM python:3.8-alpine
+
 LABEL maintainer="Benoit Verret TM <benoit.verret@toumoro.com>"
 
 LABEL org.label-schema.vendor="Toumoro"
