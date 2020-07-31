@@ -1,0 +1,28 @@
+name: Publish Super-Linter Action
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'super-linter-action/Dockerfile'
+      - 'super-linter-action/**/*.sh'
+      - 'super-linter-action/**/*.py'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish Super-Linter Action
+        uses: docker/build-push-action@v1
+        with:
+          registry: 'docker.io'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          path: super-linter-action
+          repository: toumoro/super-linter-action
+          add_git_labels: true
+          tag_with_sha: true
+          tag_with_ref: true
