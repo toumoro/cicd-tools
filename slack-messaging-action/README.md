@@ -108,18 +108,18 @@ stage:
 image: toumoro/slack-messaging-action:latest
   script: [ 'true' ]
   variables:
-    API_URL: ${{ env.API_URL }}
-    API_KEY: ${{ secrets.API_KEY }}
+    API_URL: $API_URL
+    API_KEY: $API_KEY
     SERVICE: github
     CHANNEL: my-channel
-    REF: ${{ github.ref }}
-    RUN_ID: ${{ github.run_id }}
+    REF: github.ref
+    RUN_ID: github.run_id
     STEP: Tests
     TYPE: deploy
     STATUS: Build:PASS;Test:PASS
     ISSUE_ID: '1234'
-    ACTOR: ${{ github.actor }}
-    REPOSITORY: ${{ github.repository }}
+    ACTOR: github.actor
+    REPOSITORY: github.repository
     WORKFLOW: 'my-next-workflow.yml'
     VERBOSE: '0'
 ```
@@ -139,18 +139,18 @@ pipelines:
         - set_environment_variable
         - pipe: toumoro/slack-messaging-action:latest
           variables:
-            API_URL: ${{ env.API_URL }}
-            API_KEY: ${{ secrets.API_KEY }}
-            SERVICE: github
+            API_URL: $API_URL
+            API_KEY: $API_KEY
+            SERVICE: bitbucket
             CHANNEL: my-channel
-            REF: ${{ github.ref }}
-            RUN_ID: ${{ github.run_id }}
+            REF: BITBUCKET_BRANCH
+            RUN_ID: github.run_id
             STEP: Tests
             TYPE: deploy
             STATUS: Build:PASS;Test:PASS
             ISSUE_ID: '1234'
-            ACTOR: ${{ github.actor }}
-            REPOSITORY: ${{ github.repository }}
+            ACTOR: github.actor
+            REPOSITORY: github.repository
             WORKFLOW: 'my-next-workflow.yml'
             VERBOSE: '0'
 ```
